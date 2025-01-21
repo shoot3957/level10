@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MemberDAO {
@@ -96,5 +98,10 @@ public class MemberDAO {
     }
     public boolean isDataExsit() {
         return !memberList.isEmpty();
+    }
+    public List<Member> getSortedMembers() {
+        List<Member> sortedList = new ArrayList<>(memberList); // 복사본 생성
+        Collections.sort(sortedList, Comparator.comparing(Member::getName)); // 이름순 정렬
+        return sortedList;
     }
 }
