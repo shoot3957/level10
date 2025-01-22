@@ -7,19 +7,18 @@ import java.util.Scanner;
 
 public class GameManager {
 	Random ran = new Random();
-	static Scanner scan = new Scanner(System.in);
-	static String nextStage = "";
-	String curStage = "";
-	Map<String, Stage> stageList = new HashMap<String, Stage>();
+    static Scanner scan = new Scanner(System.in);
+    static String nextStage = "";
+    String curStage = "";
+    Map<String, Stage> stageList = new HashMap<>();
+    UnitManager unitManager = new UnitManager(); // UnitManager 인스턴스 생성
 
-	GameManager() {
-
-		stageList.put("TITLE", new StageTitle());
-		stageList.put("BATTLE", new StageBattle());
-		stageList.put("LOBBY", new StageLobby());
-
-		nextStage = "TITLE";
-	}
+    GameManager() {
+        stageList.put("TITLE", new StageTitle());
+        stageList.put("BATTLE", new StageBattle(unitManager)); // 전달
+        stageList.put("LOBBY", new StageLobby());
+        nextStage = "TITLE";
+    }
 
 	boolean changeStage() {
 		System.out.println("curStage : " + curStage);

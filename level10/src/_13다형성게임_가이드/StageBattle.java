@@ -4,23 +4,24 @@ import java.util.Random;
 import java.util.Vector;
 
 public class StageBattle extends Stage {
-	UnitManager unitManager = new UnitManager();
-	Vector<Player> playerList = null;
-	Vector<Unit> monList = null;
-	Random ran = new Random();
-	int monDead = 0;
-	int playerDead = 0;
+	UnitManager unitManager;
+    Vector<Player> playerList = null;
+    Vector<Unit> monList = null;
+    Random ran = new Random();
+    int monDead = 0;
+    int playerDead = 0;
 
-	public void init() {
-		unitManager.mon_list.clear();
-		unitManager.monster_rand_set(4);
-		playerList = null;
-		playerList = unitManager.player_list;
-		monList = null;
-		monList = unitManager.mon_list;
-		monDead = monList.size();
-		playerDead = playerList.size();
-	}
+    public StageBattle(UnitManager unitManager) {
+        this.unitManager = unitManager;
+    }
+
+    public void init() {
+        unitManager.monster_rand_set(4);
+        playerList = unitManager.player_list;
+        monList = unitManager.mon_list;
+        monDead = monList.size();
+        playerDead = playerList.size();
+    }
 
 	void print_character() {
 		System.out.println("======[BATTLE]======");
@@ -44,13 +45,12 @@ public class StageBattle extends Stage {
 		int sel = GameManager.scan.nextInt();
 		if (sel == 1) {
 			while (true) {
-				int idx = ran.nextInt(monList.size());
-
-				if (monList.get(idx).curhp > 0) {
-					p.attack(monList.get(idx));
-					break;
-				}
-			}
+	            int idx = ran.nextInt(monList.size());
+	            if (monList.get(idx).curhp > 0) {
+	                p.attack(monList.get(idx));
+	                break;
+	            }
+	        }
 		} else if (sel == 2) {
 		}
 	}
